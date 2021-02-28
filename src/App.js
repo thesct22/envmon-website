@@ -15,24 +15,24 @@ import LineChart from 'react-linechart';
 import '../node_modules/react-linechart/dist/styles.css';
 
 import "./App.css";
+import { computeHeadingLevel } from "@testing-library/dom";
 
 const App = () => {
   const [firebaseconfig,setconfig]=useState(config);
-  if (!firebase.apps.length) {
-    firebase.initializeApp(firebaseconfig);
- }
+//   if (!firebase.apps.length) {
+//     firebase.initializeApp(firebaseconfig);
+//  }
   const [theme, themeToggler, mountedComponent] = useDarkMode();
   const themeMode = theme === 'light' ? lightTheme : darkTheme;
   const data = [
     {									
-        color: "steelblue", 
         points: [{x: 1, y: 28}, {x: 3, y: 26}, {x: 7, y: 26},{x: 9, y: 24}] 
     },
     {									
-      color: "green", 
       points: [{x: 1, y: 23}, {x: 3, y: 23}, {x: 7, y: 24},{x: 8, y: 25}] 
   }
 ];
+console.log(data);
 
   if(!mountedComponent) return <div/>
   return (
@@ -43,21 +43,40 @@ const App = () => {
           <FirebaseDatabaseProvider firebase={firebase} {...firebaseconfig}>
             <Toggle theme={theme} toggleTheme={themeToggler} />
             <h4>Hello World</h4>
-            <LineChart 
-              width={600}
-              height={400}
-              data={data}
-            />
+            
             <FirebaseDatabaseNode
             path="hum/"
             orderByKey
             // orderByValue={"created_on"}
           >
             {d=>{
-              console.log(d);
-              return(
-                null
+              if(d.value!=null)
+              {
+              
+                var temppoints=Object.keys(d.value).map(function(keyName, keyIndex) {
+                  
+                  var plot1=Object.keys(d.value[keyName]).map(function(hum, humIndex) {
+                    var obj={x:null,y:null};
+                    obj.x=Number(hum);
+                    obj.y=d.value[keyName][hum];
+                    return obj;
+                  });
+                  var temppoint={points:null};
+                  temppoint.points=plot1;
+                  return temppoint;
+                });
+                console.log(temppoints);
+                return(
+                
+                <LineChart 
+                  width={600}
+                  height={400}
+                  data={temppoints}
+                />
               )
+              }
+              else return null
+              
             }}
           </FirebaseDatabaseNode>
           </FirebaseDatabaseProvider>
