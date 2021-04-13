@@ -5,6 +5,8 @@ import  {useDarkMode} from "./components/useDarkMode"
 import { GlobalStyles } from "./components/globalStyles";
 import { lightTheme, darkTheme } from "./components/Themes"
 import Toggle from "./components/Toggler";
+import Login from "./components/Login"
+import Register from "./components/Register"
 
 import config from './firebaseConfig';
 import firebase from "firebase/app";
@@ -16,6 +18,7 @@ import '../node_modules/react-linechart/dist/styles.css';
 
 import "./App.css";
 import { computeHeadingLevel } from "@testing-library/dom";
+
 
 const App = () => {
   const [firebaseconfig,setconfig]=useState(config);
@@ -40,6 +43,8 @@ console.log(data);
       <>
       <GlobalStyles/>
         <div className="App">
+          {/* <Login/> */}
+          {/* <Register /> */}
           <FirebaseDatabaseProvider firebase={firebase} {...firebaseconfig}>
             <Toggle theme={theme} toggleTheme={themeToggler} />
             <h4>Hello World</h4>
@@ -72,7 +77,13 @@ console.log(data);
                   width={600}
                   height={400}
                   data={temppoints}
-                />
+                  margin={{
+                    top: 35,
+                    right: 30,
+                    left: 20,
+                    bottom: 5,
+                  }}
+                  ></LineChart>
               )
               }
               else return null

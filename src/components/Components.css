@@ -1,0 +1,62 @@
+.login .btnLogin{
+    position: relative;
+    top: 80%;
+    left: 30%;
+    margin-top: 20px;
+    align-items: center;
+    background-color: chocolate;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    font-size: 20px;
+    display: inline-block;
+    border-radius: 15px;
+  }
+  
+  .login .divbtnLogin .btnLogin{
+    transition-duration: 0.5s;
+  }
+  
+  .login .divbtnLogin .btnLogin:hover{
+    background-color: white;
+    color: black;
+    cursor: pointer;
+  }
+
+  .Popup{
+      display: none;
+  }
+  
+  .register .btnLogin{
+    position: relative;
+    top: 80%;
+    left: 30%;
+    margin-top: 20px;
+    align-items: center;
+    background-color: chocolate;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    font-size: 20px;
+    display: inline-block;
+    border-radius: 15px;
+  }
+  
+  .register .divbtnLogin .btnLogin{
+    transition-duration: 0.5s;
+  }
+  
+  .register .divbtnLogin .btnLogin:hover{
+    background-color: white;
+    color: black;
+    cursor: pointer;
+  }
+
+  .Popup{
+      display: none;
+  }
+
+  .register .authority{
+    text-align: center;
+    color: aliceblue;
+  }

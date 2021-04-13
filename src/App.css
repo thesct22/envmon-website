@@ -1,5 +1,5 @@
 .App {
-  text-align: center;
+  
 }
 
 .App-logo {
@@ -36,3 +36,78 @@
     transform: rotate(360deg);
   }
 }
+
+
+
+.login {
+  position: absolute;
+  width: fit-content;
+  height: fit-content;
+  padding: 50px;
+  z-index: 15;
+  top: 40%;
+  left: 48%;
+  margin: -100px 0 0 -150px;
+  background-color: rgb(23, 79, 134);
+  z-index: 10;
+  box-shadow: 5px 8px 10px;
+}
+
+.login .form{
+padding: 10px;
+}
+
+.login .form label{
+font-size: medium;
+font-weight: 500;
+color: floralwhite;
+}
+
+.login .form input{
+  padding: 6px;
+  width: 200px;
+}
+
+.login .form .space{
+  padding: 10px;
+}
+.login .space{
+  padding: 10px;
+}
+
+.register {
+  position: absolute;
+  width: fit-content;
+  height: fit-content;
+  padding: 50px;
+  z-index: 15;
+  top: 20%;
+  left: 40%;
+  /* margin: 100px; */
+  background-color: rgb(23, 79, 134);
+  z-index: 10;
+  box-shadow: 5px 8px 10px;
+}
+
+.register .form{
+padding: 10px;
+}
+
+.register .form label{
+font-size: medium;
+font-weight: 500;
+color: floralwhite;
+}
+
+.register .form input{
+  padding: 6px;
+  width: 200px;
+}
+
+.register .form .space{
+  padding: 10px;
+}
+.register .space{
+  padding: 10px;
+}
+
