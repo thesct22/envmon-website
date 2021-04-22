@@ -126,33 +126,73 @@ color: floralwhite;
   color:black;
 }
 
-/* .mainBody .opList{
-  display: none;
-}
-.mainBody .opList:hover{
-  display:list-item;
-} */
 
-.mainBody .dropdown{
-  position: relative;
-}
 
-.mainBody .dropdown .opList{
-  display: none;
-  position: absolute;
-  background-color: #f1f1f1;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
-}
+.login .btnLogin{
+    position: relative;
+    width: max-content;
+    left: 35%;
+    margin-top: 20px;
+    align-items: center;
+    background-color: chocolate;
+    border: none;
+    color: white;
+    padding: 10px;
+    font-size: 20px;
+    display: inline-block;
+    border-radius: 15px;
+  }
+  
+  .login .divbtnLogin .btnLogin{
+    transition-duration: 0.5s;
+  }
+  
+  .login .divbtnLogin .btnLogin:hover{
+    background-color: white;
+    color: black;
+    cursor: pointer;
+  }
 
-.dropdown:hover{
-display: block;
-}
+  .login p{
+    color: white;
+  }
 
-.mainBody .dropdown .opList a{
-  color: black;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-}
+  .Popup{
+      display: none;
+  }
+  
+  .register .btnLogin{
+    position: relative;
+    top: 80%;
+    left: 30%;
+    margin-top: 20px;
+    align-items: center;
+    background-color: chocolate;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    font-size: 20px;
+    display: inline-block;
+    border-radius: 15px;
+  }
+  
+  .register .divbtnLogin .btnLogin{
+    transition-duration: 0.5s;
+  }
+  
+  .register .divbtnLogin .btnLogin:hover{
+    background-color: white;
+    color: black;
+    cursor: pointer;
+  }
+
+  .Popup{
+      display: none;
+  }
+
+  .register .authority{
+    text-align: center;
+    color: aliceblue;
+  }
+
+ 
