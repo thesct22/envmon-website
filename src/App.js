@@ -7,7 +7,6 @@ import firebase from 'firebase/app';
 import 'firebase/database';
 
 import "./App.css";
-import { computeHeadingLevel } from "@testing-library/dom";
 
 const App = ()=> {
 
