@@ -1,4 +1,4 @@
-* {
+/* * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -61,7 +61,6 @@ color: floralwhite;
   z-index: 15;
   top: 20%;
   left: 40%;
-  /* margin: 100px; */
   background-color: rgb(23, 79, 134);
   z-index: 10;
   box-shadow: 5px 8px 10px;
@@ -195,4 +194,4 @@ color: floralwhite;
     color: aliceblue;
   }
 
- 
+  */
