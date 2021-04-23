@@ -24,15 +24,7 @@ const App = () => {
 //  }
   const [theme, themeToggler, mountedComponent] = useDarkMode();
   const themeMode = theme === 'light' ? lightTheme : darkTheme;
-  const data = [
-    {									
-        points: [{x: 1, y: 28}, {x: 3, y: 26}, {x: 7, y: 26},{x: 9, y: 24}] 
-    },
-    {									
-      points: [{x: 1, y: 23}, {x: 3, y: 23}, {x: 7, y: 24},{x: 8, y: 25}] 
-  }
-];
-console.log(data);
+  const colorarray=["Green", "Aqua", "Coral", "Magenta", "Orchid", "DeepPink", "Lime", "Yellow", "SteelBlue", "Violet"];
 
   if(!mountedComponent) return <div/>
   return (
@@ -62,6 +54,7 @@ console.log(data);
                     return obj;
                   });
                   var temppoint={points:null};
+                  temppoint.color=colorarray[keyIndex];
                   temppoint.points=plot1;
                   return temppoint;
                 });
@@ -69,8 +62,8 @@ console.log(data);
                 return(
                 
                 <LineChart 
-                  width={600}
-                  height={400}
+                  width={1600}
+                  height={800}
                   data={temppoints}
                 />
               )
