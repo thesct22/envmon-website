@@ -1,13 +1,13 @@
 import firebase from 'firebase'
 const firebaseConfig = {
-    apiKey: "AIzaSyCRmEPexDjNFxE3IqvIW0eRSkFX63hPdes",
-    authDomain: "envmon-12b11.firebaseapp.com",
-    databaseURL: "https://envmon-12b11-default-rtdb.europe-west1.firebasedatabase.app",
-    projectId: "envmon-12b11",
-    storageBucket: "envmon-12b11.appspot.com",
-    messagingSenderId: "553540257115",
-    appId: "1:553540257115:web:b57d57b85ce73f6cbc467e",
-    measurementId: "G-VQYB8MCVKW"
+    apiKey: process.env.REACT_APP_apiKey,
+    authDomain: process.env.REACT_APP_authDomain,
+    databaseURL: process.env.REACT_APP_databaseURL,
+    projectId: process.env.REACT_APP_projectId,
+    storageBucket: process.env.REACT_APP_storageBucket,
+    messagingSenderId: process.env.REACT_APP_messagingSenderId,
+    appId: process.env.REACT_APP_appId,
+    measurementId: process.env.REACT_APP_measurementId
 };
 const config = firebase.initializeApp(firebaseConfig);
 export default config;
