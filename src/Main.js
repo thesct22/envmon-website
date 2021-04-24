@@ -47,6 +47,7 @@ const Main =({handleLogout},{handleSignUp})=> {
   var [radios,setradios] = useState("all");
   var [fd,setfd]=useState(0);
   var [td,settd]=useState(0);
+  var [ln,setln]=useState(0);
 
   function useForceUpdate(){
     const [value, setValue] = useState(false); // integer state
@@ -137,6 +138,10 @@ const Main =({handleLogout},{handleSignUp})=> {
                               return element;
                           });
                         }
+                        else if(radios==="lastn"){
+                          console.log("henlo  ")
+                          temppoint.points=temppoint.points.slice(Math.max(temppoint.points.length - ln, 0))
+                        }
                         console.log(temppoint)
                         return temppoint;
                       }
@@ -209,7 +214,7 @@ const Main =({handleLogout},{handleSignUp})=> {
                   isSelected={ radios === "lastn" }  
                 />
                 <label for="lastn">
-                  Last <input type="number" id="lastvals" name="lastvals" disabled={radios!=="lastn"}/> data
+                  Last <input type="number" onChange={e=>setln(e.target.value)} id="lastvals" name="lastvals" disabled={radios!=="lastn"}/> data
                 </label><br></br>
                 <RadioButton 
                   changed={ handleradios } 
