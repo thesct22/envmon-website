@@ -16,7 +16,7 @@ import {FirebaseDatabaseProvider, FirebaseDatabaseNode} from "@react-firebase/da
 import LineChart from 'react-linechart';
 import '../node_modules/react-linechart/dist/styles.css';
 
-import "react-datetime/css/react-datetime.css";
+import "./components/react-datetime.css";
 import Datetime from "react-datetime";
 
 import RadioButton from "./components/RadioButton.js";
@@ -139,7 +139,6 @@ const Main =({handleLogout},{handleSignUp})=> {
                           });
                         }
                         else if(radios==="lastn"){
-                          console.log("henlo  ")
                           temppoint.points=temppoint.points.slice(Math.max(temppoint.points.length - ln, 0))
                         }
                         console.log(temppoint)
@@ -182,66 +181,95 @@ const Main =({handleLogout},{handleSignUp})=> {
                 }}
             </FirebaseDatabaseNode>
             </FirebaseDatabaseProvider>
-            <div>
-              <form>
-                {
-                  sensorname.map((value)=>{
-                    //console.log(snchk)
-                    return(
-                      <>
-                      <Checkbox
-                        title={value}
-                        fnClick={v => setsnchk({[value]:v})}
-                        checked={snchk[value]}
-                      /><br/>
-                      </>
-                    )
-                  })
-                }
-              </form>
+            <div className="row">
+              <div className="col-sm-2">
+                <form>
+                  {
+                    sensorname.map((value)=>{
+                      //console.log(snchk)
+                      return(
+                        <>
+                        <Checkbox
+                          title={value}
+                          fnClick={v => setsnchk({[value]:v})}
+                          checked={snchk[value]}
+                        /><br/>
+                        </>
+                      )
+                    })
+                  }
+                </form>
+              </div>
+              <div className="col-sm-6">
+                <form>
+                  <RadioButton 
+                    changed={handleradios} 
+                    id="all" 
+                    isSelected={ radios === "all" }  
+                  />
+                  <label for="all">All data</label><br></br>
+                  <RadioButton 
+                    changed={handleradios} 
+                    id="lastn" 
+                    isSelected={ radios === "lastn" }  
+                  />
+                  <label for="lastn">
+                    <div className="row">
+                      <div className="col">
+                        Last{" "}
+                      </div>
+                      <div className="col">
+                        <input type="number" onChange={e=>setln(e.target.value)} id="lastvals" name="lastvals" disabled={radios!=="lastn"}/> 
+                      </div>
+                      <div className="col">
+                        {" "}data
+                      </div>
+                    </div>
+                  </label><br></br>
+                  <RadioButton 
+                    changed={ handleradios } 
+                    id="fromdate" 
+                    isSelected={ radios === "fromdate" }  
+                  />
+                  <label for="fromdate">
+                    <div className="row">
+                    <div className="col-4">
+                      Data from{" "}
+                    </div>
+                    <div className="col">
+                      <Datetime onChange={e=>setfd(e._d.getTime())} inputProps={{disabled: radios!=="fromdate"}} />
+                    </div>
+                    </div>
+                    
+                  </label><br></br>
+                  <RadioButton 
+                    changed={ handleradios } 
+                    id="between" 
+                    isSelected={ radios === "between" }  
+                  />
+                  <label for="between">
+                  <div className="row">
+                    <div className="col-3">
+                      Data between 
+                    </div>
+                    <div className="col">
+                      <Datetime onChange={e=>setfd(e._d.getTime())} inputProps={{disabled: radios!=="between"}}/>
+                    </div>  
+                    <div className="col-1">
+                    and{" "}
+                    </div>
+                    <div className="col">
+                      <Datetime onChange={e=>settd(e._d.getTime())} inputProps={{disabled: radios!=="between"}}/>
+                    </div>
+                  </div>
+                  </label><br></br>
+
+                </form>
+              </div>
+
+
+              {/* <Sensors vals={sensorname} setsnchk={setsnchk}/> */}
             </div>
-            <div>
-              <form>
-                <RadioButton 
-                  changed={handleradios} 
-                  id="all" 
-                  isSelected={ radios === "all" }  
-                />
-                <label for="all">All data</label><br></br>
-                <RadioButton 
-                  changed={handleradios} 
-                  id="lastn" 
-                  isSelected={ radios === "lastn" }  
-                />
-                <label for="lastn">
-                  Last <input type="number" onChange={e=>setln(e.target.value)} id="lastvals" name="lastvals" disabled={radios!=="lastn"}/> data
-                </label><br></br>
-                <RadioButton 
-                  changed={ handleradios } 
-                  id="fromdate" 
-                  isSelected={ radios === "fromdate" }  
-                />
-                <label for="fromdate">
-                  Data from {" "}
-                  <Datetime onChange={e=>setfd(e._d.getTime())} inputProps={{disabled: radios!=="fromdate"}}/>
-                </label><br></br>
-                <RadioButton 
-                  changed={ handleradios } 
-                  id="between" 
-                  isSelected={ radios === "between" }  
-                />
-                <label for="between">
-                  Data between 
-                  <Datetime onChange={e=>setfd(e._d.getTime())} inputProps={{disabled: radios!=="between"}}/>
-                  {" "}and{" "}
-                  <Datetime onChange={e=>settd(e._d.getTime())} inputProps={{disabled: radios!=="between"}}/>
-                </label><br></br>
-
-              </form>
-            </div>
-
-
-            {/* <Sensors vals={sensorname} setsnchk={setsnchk}/> */}
           </div>
         </>
       </ThemeProvider>
