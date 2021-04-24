@@ -3,7 +3,7 @@ import React, { useState,useReducer} from 'react';
 import {ThemeProvider} from "styled-components";
 import  {useDarkMode} from "./components/useDarkMode"
 import { GlobalStyles } from "./components/globalStyles";
-import { lightTheme, darkTheme } from "./components/Themes"
+import { lightTheme, darkTheme } from "./components/Themes";
 import Toggle from "./components/Toggler";
 import ToggleButton from './components/ToggleButton'
 
@@ -21,13 +21,15 @@ import Datetime from "react-datetime";
 
 import RadioButton from "./components/RadioButton.js";
 
+import colorset from "./components/colorset";
+import initialState from "./components/initialstate";
+
 import {ListGroup} from 'react-bootstrap';
 
 const Checkbox = ({ fnClick, title = "", checked = false }) => {
   return(<label>
     <input
       onChange={e => {
-         // console.log(fnClick)
         if (fnClick !== undefined) fnClick(e.target.checked);
       }}
       onClick={e => {
@@ -41,7 +43,6 @@ const Checkbox = ({ fnClick, title = "", checked = false }) => {
 }
 
 
-
 const Main =({handleLogout})=> {
 
   const [firebaseconfig,setconfig]=useState(config);
@@ -50,31 +51,6 @@ const Main =({handleLogout})=> {
   var [fd,setfd]=useState(0);
   var [td,settd]=useState(0);
   var [ln,setln]=useState(0);
-
-  var colorset = 
-    [ '#FF6633', '#FFB399', '#FF33FF', '#FFFF99', '#00B3E6', 
-		  '#E6B333', '#3366E6', '#999966', '#99FF99', '#B34D4D',
-		  '#80B300', '#809900', '#E6B3B3', '#6680B3', '#66991A', 
-		  '#FF99E6', '#CCFF1A', '#FF1A66', '#E6331A', '#33FFCC',
-		  '#66994D', '#B366CC', '#4D8000', '#B33300', '#CC80CC', 
-		  '#66664D', '#991AFF', '#E666FF', '#4DB3FF', '#1AB399',
-		  '#E666B3', '#33991A', '#CC9999', '#B3B31A', '#00E680', 
-		  '#4D8066', '#809980', '#E6FF80', '#1AFF33', '#999933',
-		  '#FF3380', '#CCCC00', '#66E64D', '#4D80CC', '#9900B3', 
-		  '#E64D66', '#4DB380', '#FF4D4D', '#99E6E6', '#6666FF'];
-
-  var initialState= {
-    "Control Room":true,
-    "Conveyer Belt 1": true,
-    "Conveyer Belt 2": true,
-    "Manager's Cabin": true,
-    "Office Central": true,
-    "Office Corner 1": true,
-    "Office Corner 2": true,
-    "Office Corner 3": true,
-    "Office Corner 4": true,
-    "Storage Room": true
-  };
 
   const reducer = (state, action) => ({ ...state, ...action });
   const [snchk, setsnchk] =useReducer(reducer, initialState);
@@ -121,7 +97,6 @@ const Main =({handleLogout})=> {
               <FirebaseDatabaseNode
                 path={humtemp}
                 orderByKey
-                // orderByValue={"created_on"}
               >
                 {d=>{
                   if(d.value!=null)
@@ -133,8 +108,6 @@ const Main =({handleLogout})=> {
                         var plot1=Object.keys(d.value[keyName]).map(function(hum, humIndex) {
                           var obj={x:null,y:null};
                           obj.x=Number(hum);
-                          //var milliseconds=Number(hum);
-                          //obj.x = new Date(milliseconds);
                           obj.y=d.value[keyName][hum];
                           return obj;
                         });
@@ -160,27 +133,17 @@ const Main =({handleLogout})=> {
                         else if(radios==="lastn"){
                           temppoint.points=temppoint.points.slice(Math.max(temppoint.points.length - ln, 0))
                         }
-                        // console.log(temppoint)
                         return temppoint;
                       }
                       
                     });
-                    // console.log(td);
-                    // console.log(fd);
-                    // console.log(radios);
                     
                     temppoints = temppoints.filter(function( element ) {
                       return element !== undefined;
                    });
-                    //console.log(temppoints)
-
-
-                    //setsnchk(Object.keys(d.value));
-                    //console.log(Object.keys(d.value));
                     var setsensorchk=(sensorname)=>{
                       sensorchk[sensorname]=!sensorchk[sensorname];
                     }
-                    console.log(humtemp)
                     return(
                     <div className="row">
                       <div className="col-lg-10">
@@ -204,14 +167,12 @@ const Main =({handleLogout})=> {
                           onPointHover={(point)=> {
                             return `<p class="popup"><b>X value:</b> ${new Date(point.x)}</p><p class="popup"><b>Y value:</b> ${point.y}</p>`
                           }}
-                          //margins={{ top: 150, right: 120, bottom:120 }}
                         />                        
                       </div>
                       <div className="col-lg-2">
                       <ListGroup >
                         {
                           temppoints.map((key,index)=>{
-                            //console.log(key)
                             return(
                             <ListGroup.Item className="changediv" key={index}>
                               <div className="row changediv">
@@ -239,7 +200,6 @@ const Main =({handleLogout})=> {
                 <form>
                   {
                     sensorname.map((value)=>{
-                      //console.log(snchk)
                       return(
                         <>
                         <Checkbox
@@ -319,9 +279,6 @@ const Main =({handleLogout})=> {
 
                 </form>
               </div>
-
-
-              {/* <Sensors vals={sensorname} setsnchk={setsnchk}/> */}
             </div>
           </div>
         </>
@@ -330,4 +287,4 @@ const Main =({handleLogout})=> {
   )
 }
 
-export default Main
+export default Main;
