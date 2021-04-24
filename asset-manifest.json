@@ -1,24 +1,24 @@
 {
   "files": {
-    "main.css": "/envmon/static/css/main.5139064b.chunk.css",
-    "main.js": "/envmon/static/js/main.15c41579.chunk.js",
-    "main.js.map": "/envmon/static/js/main.15c41579.chunk.js.map",
-    "runtime-main.js": "/envmon/static/js/runtime-main.f96af65f.js",
-    "runtime-main.js.map": "/envmon/static/js/runtime-main.f96af65f.js.map",
-    "static/css/2.da71d42e.chunk.css": "/envmon/static/css/2.da71d42e.chunk.css",
-    "static/js/2.83dc601b.chunk.js": "/envmon/static/js/2.83dc601b.chunk.js",
-    "static/js/2.83dc601b.chunk.js.map": "/envmon/static/js/2.83dc601b.chunk.js.map",
-    "static/js/3.1c5ac766.chunk.js": "/envmon/static/js/3.1c5ac766.chunk.js",
-    "static/js/3.1c5ac766.chunk.js.map": "/envmon/static/js/3.1c5ac766.chunk.js.map",
-    "index.html": "/envmon/index.html",
-    "static/css/2.da71d42e.chunk.css.map": "/envmon/static/css/2.da71d42e.chunk.css.map",
-    "static/css/main.5139064b.chunk.css.map": "/envmon/static/css/main.5139064b.chunk.css.map",
-    "static/js/2.83dc601b.chunk.js.LICENSE.txt": "/envmon/static/js/2.83dc601b.chunk.js.LICENSE.txt"
+    "main.css": "/envmon-website/static/css/main.5139064b.chunk.css",
+    "main.js": "/envmon-website/static/js/main.15c41579.chunk.js",
+    "main.js.map": "/envmon-website/static/js/main.15c41579.chunk.js.map",
+    "runtime-main.js": "/envmon-website/static/js/runtime-main.3773d210.js",
+    "runtime-main.js.map": "/envmon-website/static/js/runtime-main.3773d210.js.map",
+    "static/css/2.da71d42e.chunk.css": "/envmon-website/static/css/2.da71d42e.chunk.css",
+    "static/js/2.b93ed669.chunk.js": "/envmon-website/static/js/2.b93ed669.chunk.js",
+    "static/js/2.b93ed669.chunk.js.map": "/envmon-website/static/js/2.b93ed669.chunk.js.map",
+    "static/js/3.1c5ac766.chunk.js": "/envmon-website/static/js/3.1c5ac766.chunk.js",
+    "static/js/3.1c5ac766.chunk.js.map": "/envmon-website/static/js/3.1c5ac766.chunk.js.map",
+    "index.html": "/envmon-website/index.html",
+    "static/css/2.da71d42e.chunk.css.map": "/envmon-website/static/css/2.da71d42e.chunk.css.map",
+    "static/css/main.5139064b.chunk.css.map": "/envmon-website/static/css/main.5139064b.chunk.css.map",
+    "static/js/2.b93ed669.chunk.js.LICENSE.txt": "/envmon-website/static/js/2.b93ed669.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.f96af65f.js",
+    "static/js/runtime-main.3773d210.js",
     "static/css/2.da71d42e.chunk.css",
-    "static/js/2.83dc601b.chunk.js",
+    "static/js/2.b93ed669.chunk.js",
     "static/css/main.5139064b.chunk.css",
     "static/js/main.15c41579.chunk.js"
   ]
