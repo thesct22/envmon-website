@@ -5,7 +5,7 @@ ENV PATH /app/node_modules/.bin:$PATH
 RUN apk upgrade --update && apk add --no-cache python3 python3-dev gcc gfortran freetype-dev musl-dev libpng-dev g++ lapack-dev
 COPY package.json ./
 COPY package-lock.json ./
-RUN npm i --silent
+RUN npm ci --silent
 RUN npm install react-scripts@4.0.3 -g --silent
 COPY . ./
 RUN npm run build
