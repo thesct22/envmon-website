@@ -42,7 +42,7 @@ const Checkbox = ({ fnClick, title = "", checked = false }) => {
 
 
 
-const Main =({handleLogout},{handleSignUp})=> {
+const Main =({handleLogout})=> {
 
   const [firebaseconfig,setconfig]=useState(config);
   var [humtemp, sethumtemp] = useState("temp/");
@@ -51,7 +51,8 @@ const Main =({handleLogout},{handleSignUp})=> {
   var [td,settd]=useState(0);
   var [ln,setln]=useState(0);
 
-  var colorset = ['#FF6633', '#FFB399', '#FF33FF', '#FFFF99', '#00B3E6', 
+  var colorset = 
+    [ '#FF6633', '#FFB399', '#FF33FF', '#FFFF99', '#00B3E6', 
 		  '#E6B333', '#3366E6', '#999966', '#99FF99', '#B34D4D',
 		  '#80B300', '#809900', '#E6B3B3', '#6680B3', '#66991A', 
 		  '#FF99E6', '#CCFF1A', '#FF1A66', '#E6331A', '#33FFCC',
@@ -61,11 +62,6 @@ const Main =({handleLogout},{handleSignUp})=> {
 		  '#4D8066', '#809980', '#E6FF80', '#1AFF33', '#999933',
 		  '#FF3380', '#CCCC00', '#66E64D', '#4D80CC', '#9900B3', 
 		  '#E64D66', '#4DB380', '#FF4D4D', '#99E6E6', '#6666FF'];
-
-  function useForceUpdate(){
-    const [value, setValue] = useState(false); // integer state
-    return () => setValue(value => !value); // update the state to force render
-}
 
   var initialState= {
     "Control Room":true,
@@ -87,6 +83,15 @@ const Main =({handleLogout},{handleSignUp})=> {
       setradios(e.target.id)
   }
 
+  var refresht = ()=>{
+    if(humtemp==="temp/"){
+      sethumtemp("hum/");
+    }
+    else{
+      sethumtemp("temp/");
+    }
+  }
+
   var sensorname=Object.keys(snchk);
 
   const [theme, themeToggler, mountedComponent] = useDarkMode();
@@ -100,7 +105,7 @@ const Main =({handleLogout},{handleSignUp})=> {
 
         <Toggle theme={theme} toggleTheme={themeToggler} />
         <ToggleButton  daynight={false} icons={{checked: "🌡", unchecked: "💦"}} sethumtemp={sethumtemp} defaultChecked={true}/>
-
+        <button onClick={refresht} onClickCapture={refresht}>Refresh</button>
         <button onClick={handleLogout}>Logout</button>
         
       </nav>
@@ -180,6 +185,8 @@ const Main =({handleLogout},{handleSignUp})=> {
                     <div className="row">
                       <div className="col-lg-10">
                         <LineChart 
+                          id={"thechart"}
+                          class={"thechart"}
                           width={1300}
                           heighr={720}
                           data={temppoints}
@@ -203,12 +210,12 @@ const Main =({handleLogout},{handleSignUp})=> {
                       <div className="col-lg-2">
                       <ListGroup >
                         {
-                          temppoints.map((key)=>{
+                          temppoints.map((key,index)=>{
                             //console.log(key)
                             return(
-                            <ListGroup.Item className="changediv">
+                            <ListGroup.Item className="changediv" key={index}>
                               <div className="row changediv">
-                              <div className="col-1 changediv" style={{backgroundColor:key.color, width:"10px", height:"10px"}}></div> 
+                              <div className="col-1 changediv"><div style={{backgroundColor:key.color, width:"10px", height:"10px"}}></div></div> 
                               <div className="col changediv">
                                 {key.name}
                               </div>
@@ -253,13 +260,13 @@ const Main =({handleLogout},{handleSignUp})=> {
                     id="all" 
                     isSelected={ radios === "all" }  
                   />
-                  <label for="all">All data</label><br></br>
+                  <label htmlFor="all">All data</label><br></br>
                   <RadioButton 
                     changed={handleradios} 
                     id="lastn" 
                     isSelected={ radios === "lastn" }  
                   />
-                  <label for="lastn">
+                  <label htmlFor="lastn">
                     <div className="row">
                       <div className="col">
                         Last{" "}
@@ -277,7 +284,7 @@ const Main =({handleLogout},{handleSignUp})=> {
                     id="fromdate" 
                     isSelected={ radios === "fromdate" }  
                   />
-                  <label for="fromdate">
+                  <label htmlFor="fromdate">
                     <div className="row">
                     <div className="col-4">
                       Data from{" "}
@@ -293,7 +300,7 @@ const Main =({handleLogout},{handleSignUp})=> {
                     id="between" 
                     isSelected={ radios === "between" }  
                   />
-                  <label for="between">
+                  <label htmlFor="between">
                   <div className="row">
                     <div className="col-3">
                       Data between 

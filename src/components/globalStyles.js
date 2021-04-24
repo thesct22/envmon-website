@@ -19,10 +19,16 @@ export const GlobalStyles = createGlobalStyle`
   }
   .svg-line-chart-label{
     fill: ${({ theme }) => theme.text};
+    margin: 100px;
   }
 
   .tick text{
     fill: ${({ theme }) => theme.text};
+    transform: rotate(90);
+  }
+
+  svg{
+    height: 750px;
   }
 
   `
