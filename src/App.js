@@ -6,7 +6,7 @@ import config from './components/firebaseConfig';
 import firebase from 'firebase/app';
 import 'firebase/database';
 
-import "./App.css";
+import "./App.scss";
 
 const App = ()=> {
 

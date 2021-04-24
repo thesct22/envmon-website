@@ -1,6 +1,6 @@
 import React from 'react'
 import { func, string } from 'prop-types';
-import '../App.css';
+import '../App.scss';
 
 import ToggleButton from './ToggleButton'
 

@@ -9,12 +9,17 @@ import ToggleButton from './components/ToggleButton'
 
 import config from './components/firebaseConfig';
 import firebase from 'firebase/app';
-import './App.css'
+import './App.scss'
 import 'firebase/database';
 import {FirebaseDatabaseProvider, FirebaseDatabaseNode} from "@react-firebase/database";
 
 import LineChart from 'react-linechart';
 import '../node_modules/react-linechart/dist/styles.css';
+
+import "react-datetime/css/react-datetime.css";
+import Datetime from "react-datetime";
+
+import RadioButton from "./components/RadioButton.js";
 
 const Checkbox = ({ fnClick, title = "", checked = false }) => {
   return(<label>
@@ -38,7 +43,10 @@ const Checkbox = ({ fnClick, title = "", checked = false }) => {
 const Main =({handleLogout},{handleSignUp})=> {
 
   const [firebaseconfig,setconfig]=useState(config);
-  const [humtemp, sethumtemp] = useState("/temp");
+  var [humtemp, sethumtemp] = useState("/temp");
+  var [radios,setradios] = useState("all");
+  var [fd,setfd]=useState(0);
+  var [td,settd]=useState(0);
 
   function useForceUpdate(){
     const [value, setValue] = useState(false); // integer state
@@ -61,10 +69,12 @@ const Main =({handleLogout},{handleSignUp})=> {
   const reducer = (state, action) => ({ ...state, ...action });
   const [snchk, setsnchk] =useReducer(reducer, initialState);
 
+  var handleradios =e=>{
+      setradios(e.target.id)
+  }
+
   var sensorname=Object.keys(snchk);
-//   if (!firebase.apps.length) {
-//     firebase.initializeApp(firebaseconfig);
-//  }
+
   const [theme, themeToggler, mountedComponent] = useDarkMode();
   const themeMode = theme === 'light' ? lightTheme : darkTheme;
 
@@ -101,24 +111,41 @@ const Main =({handleLogout},{handleSignUp})=> {
                     var temppoints=Object.keys(d.value).map(function(keyName, keyIndex) {
                       if(snchk[keyName]){
                       
-                      var plot1=Object.keys(d.value[keyName]).map(function(hum, humIndex) {
-                        var obj={x:null,y:null};
-                        var milliseconds=Number(hum);
-                        obj.x = new Date(milliseconds);
-                        obj.y=d.value[keyName][hum];
-                        return obj;
-                      });
-                      var temppoint={points:null, name:""};
-                      temppoint.name=keyName;
-                      temppoint.points=plot1;
-                      var snr={};
-                      snr[keyName]=false;
-                      sensorchk.push(snr);
-                      //console.log(temppoint)
-                      return temppoint;}
+                        var plot1=Object.keys(d.value[keyName]).map(function(hum, humIndex) {
+                          var obj={x:null,y:null};
+                          obj.x=Number(hum);
+                          //var milliseconds=Number(hum);
+                          //obj.x = new Date(milliseconds);
+                          obj.y=d.value[keyName][hum];
+                          return obj;
+                        });
+                        var temppoint={points:null, name:""};
+                        temppoint.name=keyName;
+                        temppoint.points=plot1;
+                        var snr={};
+                        snr[keyName]=false;
+                        sensorchk.push(snr);
+                        if(radios==="fromdate"){
+                          temppoint.points=temppoint.points.filter(function(element){
+                            if(element.x>=fd)
+                              return element;
+                          });
+                        }
+                        else if(radios==="between"){
+                          temppoint.points=temppoint.points.filter(function(element){
+                            if(element.x>=fd&&element.x<=td)
+                              return element;
+                          });
+                        }
+                        console.log(temppoint)
+                        return temppoint;
+                      }
                       
                     });
-                    console.log(temppoints)
+                    console.log(td);
+                    console.log(fd);
+                    console.log(radios);
+                    
                     temppoints = temppoints.filter(function( element ) {
                       return element !== undefined;
                    });
@@ -166,6 +193,45 @@ const Main =({handleLogout},{handleSignUp})=> {
                     )
                   })
                 }
+              </form>
+            </div>
+            <div>
+              <form>
+                <RadioButton 
+                  changed={handleradios} 
+                  id="all" 
+                  isSelected={ radios === "all" }  
+                />
+                <label for="all">All data</label><br></br>
+                <RadioButton 
+                  changed={handleradios} 
+                  id="lastn" 
+                  isSelected={ radios === "lastn" }  
+                />
+                <label for="lastn">
+                  Last <input type="number" id="lastvals" name="lastvals" disabled={radios!=="lastn"}/> data
+                </label><br></br>
+                <RadioButton 
+                  changed={ handleradios } 
+                  id="fromdate" 
+                  isSelected={ radios === "fromdate" }  
+                />
+                <label for="fromdate">
+                  Data from {" "}
+                  <Datetime onChange={e=>setfd(e._d.getTime())} inputProps={{disabled: radios!=="fromdate"}}/>
+                </label><br></br>
+                <RadioButton 
+                  changed={ handleradios } 
+                  id="between" 
+                  isSelected={ radios === "between" }  
+                />
+                <label for="between">
+                  Data between 
+                  <Datetime onChange={e=>setfd(e._d.getTime())} inputProps={{disabled: radios!=="between"}}/>
+                  {" "}and{" "}
+                  <Datetime onChange={e=>settd(e._d.getTime())} inputProps={{disabled: radios!=="between"}}/>
+                </label><br></br>
+
               </form>
             </div>
 
