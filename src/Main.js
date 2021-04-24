@@ -21,6 +21,8 @@ import Datetime from "react-datetime";
 
 import RadioButton from "./components/RadioButton.js";
 
+import {ListGroup} from 'react-bootstrap';
+
 const Checkbox = ({ fnClick, title = "", checked = false }) => {
   return(<label>
     <input
@@ -43,7 +45,7 @@ const Checkbox = ({ fnClick, title = "", checked = false }) => {
 const Main =({handleLogout},{handleSignUp})=> {
 
   const [firebaseconfig,setconfig]=useState(config);
-  var [humtemp, sethumtemp] = useState("/temp");
+  var [humtemp, sethumtemp] = useState("temp/");
   var [radios,setradios] = useState("all");
   var [fd,setfd]=useState(0);
   var [td,settd]=useState(0);
@@ -110,7 +112,7 @@ const Main =({handleLogout},{handleSignUp})=> {
           <div className="App">
             <FirebaseDatabaseProvider firebase={firebase} {...firebaseconfig}>
               
-              <h4>{humtemp==="/temp"?"Temperature":"Humidity"}</h4>
+              <h4>{humtemp==="temp/"?"Temperature":"Humidity"}</h4>
               <FirebaseDatabaseNode
                 path={humtemp}
                 orderByKey
@@ -153,19 +155,19 @@ const Main =({handleLogout},{handleSignUp})=> {
                         else if(radios==="lastn"){
                           temppoint.points=temppoint.points.slice(Math.max(temppoint.points.length - ln, 0))
                         }
-                        console.log(temppoint)
+                        // console.log(temppoint)
                         return temppoint;
                       }
                       
                     });
-                    console.log(td);
-                    console.log(fd);
-                    console.log(radios);
+                    // console.log(td);
+                    // console.log(fd);
+                    // console.log(radios);
                     
                     temppoints = temppoints.filter(function( element ) {
                       return element !== undefined;
                    });
-                    console.log(temppoints)
+                    //console.log(temppoints)
 
 
                     //setsnchk(Object.keys(d.value));
@@ -173,25 +175,50 @@ const Main =({handleLogout},{handleSignUp})=> {
                     var setsensorchk=(sensorname)=>{
                       sensorchk[sensorname]=!sensorchk[sensorname];
                     }
+                    console.log(humtemp)
                     return(
-                    <div>
-                      <LineChart 
+                    <div className="row">
+                      <div className="col-lg-10">
+                        <LineChart 
+                          width={1300}
+                          heighr={720}
+                          data={temppoints}
+                          interpolate={"linear"}
+                          ticks={10}
+                          xLabel={"TimeStamp"}
+                          yLabel={humtemp==="temp/"?"Temperature":"Humidity"}
+                          xParser={e=>new Date(e)}
+                          xDisplay={e=>
+                            {
+                              var dt= new Date(e)
+                              return(dt.toLocaleString())
+                            }
+                          }
+                          onPointHover={(point)=> {
+                            return `<p class="popup"><b>X value:</b> ${new Date(point.x)}</p><p class="popup"><b>Y value:</b> ${point.y}</p>`
+                          }}
+                          //margins={{ top: 150, right: 120, bottom:120 }}
+                        />                        
+                      </div>
+                      <div className="col-lg-2">
+                      <ListGroup >
+                        {
+                          temppoints.map((key)=>{
+                            //console.log(key)
+                            return(
+                            <ListGroup.Item className="changediv">
+                              <div className="row changediv">
+                              <div className="col-1 changediv" style={{backgroundColor:key.color, width:"10px", height:"10px"}}></div> 
+                              <div className="col changediv">
+                                {key.name}
+                              </div>
+                              </div>
+                            </ListGroup.Item>)
+                          })
+                        }
                         
-                        data={temppoints}
-                        // isDate={true}
-                        xLabel={"TimeStamp"}
-                        yLabel={humtemp==="/temp"?"Temperature":"Humidity"}
-                        showLegends
-                        legendPosition="bottom-right"
-                        xParser={e=>new Date(e)}
-                        xDisplay={e=>{var dt= new Date(e)
-                                      return(dt.toLocaleString())
-                                  }}
-                        onPointHover={(point)=> {
-                          return `<p><b>X value:</b> ${new Date(point.x)}</p><p><b>Y value:</b> ${point.y}</p>`
-                        }}
-                      />
-                      
+                      </ListGroup>
+                      </div>
                     </div>
                   )
                   }
@@ -256,7 +283,7 @@ const Main =({handleLogout},{handleSignUp})=> {
                       Data from{" "}
                     </div>
                     <div className="col">
-                      <Datetime onChange={e=>setfd(e._d.getTime())} inputProps={{disabled: radios!=="fromdate"}} />
+                      <Datetime className="changediv" onChange={e=>setfd(e._d.getTime())} inputProps={{disabled: radios!=="fromdate"}} />
                     </div>
                     </div>
                     
@@ -272,13 +299,13 @@ const Main =({handleLogout},{handleSignUp})=> {
                       Data between 
                     </div>
                     <div className="col">
-                      <Datetime onChange={e=>setfd(e._d.getTime())} inputProps={{disabled: radios!=="between"}}/>
+                      <Datetime className="changediv" onChange={e=>setfd(e._d.getTime())} inputProps={{disabled: radios!=="between"}}/>
                     </div>  
                     <div className="col-1">
                     and{" "}
                     </div>
                     <div className="col">
-                      <Datetime onChange={e=>settd(e._d.getTime())} inputProps={{disabled: radios!=="between"}}/>
+                      <Datetime className="changediv" onChange={e=>settd(e._d.getTime())} inputProps={{disabled: radios!=="between"}}/>
                     </div>
                   </div>
                   </label><br></br>
