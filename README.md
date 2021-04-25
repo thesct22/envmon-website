@@ -1,5 +1,7 @@
 # EnvMon
 
+The website is made using ReactJs framework and displays the sensor data stored in Firebase and can filter through the data
+
 ## Running in dev mode
 
 Run 
