@@ -59,6 +59,15 @@ const Main =({handleLogout})=> {
       setradios(e.target.id)
   }
 
+  var legend=()=>{
+    var x = document.getElementById("legendiv");
+    if (x.style.display === "none") {
+      x.style.display = "block";
+    } else {
+      x.style.display = "none";
+    }
+  }
+
   var refresht = ()=>{
     if(humtemp==="temp/"){
       sethumtemp("hum/");
@@ -77,13 +86,30 @@ const Main =({handleLogout})=> {
   return (
     <section className="mainBody">
       <nav>
-        <h2> EnvMon </h2>
-
-        <Toggle theme={theme} toggleTheme={themeToggler} />
-        <ToggleButton  daynight={false} icons={{checked: "🌡", unchecked: "💦"}} sethumtemp={sethumtemp} defaultChecked={true}/>
-        <button onClick={refresht} onClickCapture={refresht}>Refresh</button>
-        <button onClick={handleLogout}>Logout</button>
+      <div className="container">
+      <div className="row">
+        <div className="col">
+          <h2> EnvMon </h2>
+        </div>
         
+        
+          <div className="col">
+            <Toggle theme={theme} toggleTheme={themeToggler} />
+          </div>
+          <div className="col">
+            <ToggleButton  daynight={false} icons={{checked: "🌡", unchecked: "💦"}} sethumtemp={sethumtemp} defaultChecked={true}/>
+          </div>
+          <div className="col">
+            <button onClick={refresht} onClickCapture={refresht}>Refresh</button>
+          </div>
+          <div className="col">
+            <button onClick={legend}>Legend</button>
+          </div>
+          <div className="col">
+            <button onClick={handleLogout}>Logout</button>
+          </div>
+        </div>   
+        </div> 
       </nav>
 
       <ThemeProvider theme={themeMode}>
@@ -146,7 +172,7 @@ const Main =({handleLogout})=> {
                     }
                     return(
                     <div className="row">
-                      <div className="col-lg-10">
+                      <div className="col-sm-9 col-lg-10">
                         <LineChart 
                           id={"thechart"}
                           class={"thechart"}
@@ -169,7 +195,7 @@ const Main =({handleLogout})=> {
                           }}
                         />                        
                       </div>
-                      <div className="col-lg-2">
+                      <div className="col-sm-3 col-lg-2" id="legendiv">
                       <ListGroup >
                         {
                           temppoints.map((key,index)=>{

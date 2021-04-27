@@ -58,10 +58,10 @@ const ToggleButton = ( props ) => {
         <div onClick={triggerToggle} className={toggleClasses}>
             <div className="wrg-toggle-container">
                 <div className="wrg-toggle-check">
-                    <span>{ getIcon('checked') }</span>
+                    <span style={{fontSize:"16pt"}}>{ getIcon('checked') }</span>
                 </div>
                 <div className="wrg-toggle-uncheck">
-                    <span>{ getIcon('unchecked') }</span>
+                    <span style={{fontSize:"16pt"}}>{ getIcon('unchecked') }</span>
                 </div>
             </div>
             <div className="wrg-toggle-circle"></div>
