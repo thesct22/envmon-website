@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: envmon-dep
+spec:
+  selector:
+    matchLabels:
+      run: envmon
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        run: envmon
+    spec:
+      containers:
+      - name: envmon
+        image: thesct22/envmon:alpine
+        ports:
+        - containerPort: 80
+        resources:
+          limits:
+            cpu: 500m
+          requests:
+            cpu: 200m
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: envmon
+  labels:
+    run: envmon
+spec:
+  type: NodePort
+  ports:
+  - port: 8080
+    targetPort: 80
+    protocol: TCP
+    name: http
+  - port: 443
+    protocol: TCP
+    name: https
+  selector:
+    run: envmon
+---
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: envmon-scaler
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: envmon-dep
+  minReplicas: 2
+  maxReplicas: 10
+  targetCPUUtilizationPercentage: 50
