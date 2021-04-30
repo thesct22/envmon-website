@@ -51,7 +51,7 @@ git checkout Docker
 Run from directory which has the Dockerfile
 
 ```bash
-docker build -t {your_dockerhub_id/{image_name}:{image_tag (ex: alpine)} .}
+docker build -t {your_dockerhub_id}/{image_name}:{image_tag (ex: alpine)} .
 ```
 To run the container run
 
