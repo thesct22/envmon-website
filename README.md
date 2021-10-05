@@ -2,6 +2,12 @@
 
 The website is made using ReactJs framework and displays the sensor data stored in Firebase and can filter through the data
 
+## Sample Login
+
+Since only admins can add new users, to check out the app or website use:
+xyz@abcd.com
+12345678
+
 ## Running in dev mode
 
 Run 
